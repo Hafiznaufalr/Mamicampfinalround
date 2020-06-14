@@ -1,5 +1,6 @@
 package net.hafiznaufalr.mamicamp.ui.genre
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import net.hafiznaufalr.mamicamp.data.model.Book
 import net.hafiznaufalr.mamicamp.data.network.NetworkService
 import net.hafiznaufalr.mamicamp.databinding.ActivityGenreBinding
 import net.hafiznaufalr.mamicamp.databinding.ActivityMainBinding
+import net.hafiznaufalr.mamicamp.ui.detailBook.DetailBookActivity
 import net.hafiznaufalr.mamicamp.ui.main.MainViewModel
 import net.hafiznaufalr.mamicamp.utils.Status
 import net.hafiznaufalr.mamicamp.utils.ViewModelFactory
@@ -42,8 +44,10 @@ class GenreActivity : AppCompatActivity() {
         }
         val title = intent.getStringExtra("nameGenre")
         binding.tvGenre.text = title
-        bookByGenreAdapter = BookByGenreAdapter(listBook){
-
+        bookByGenreAdapter = BookByGenreAdapter(listBook){book ->
+            val intent = Intent(this, DetailBookActivity::class.java)
+            intent.putExtra("idBook", book.id)
+            startActivity(intent)
         }
         binding.rvListBook.adapter = bookByGenreAdapter
         binding.swipeListBook.setOnRefreshListener {

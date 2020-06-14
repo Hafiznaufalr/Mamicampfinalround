@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import net.hafiznaufalr.mamicamp.R
 import net.hafiznaufalr.mamicamp.data.model.Book
-import net.hafiznaufalr.mamicamp.data.model.Genre
 import net.hafiznaufalr.mamicamp.databinding.ItemBookByGenreBinding
 import net.hafiznaufalr.mamicamp.utils.Constant
 
@@ -37,6 +36,10 @@ class BookByGenreAdapter(
             Glide.with(binding.ivBook.context).load(cover).into(binding.ivBook)
             binding.tvTitleBook.text = item.title
             binding.tvWriter.text = item.writerByWriterId?.userByUserId?.name
+
+            binding.root.rootView.setOnClickListener {
+                onCLickListener(item)
+            }
         }
     }
 

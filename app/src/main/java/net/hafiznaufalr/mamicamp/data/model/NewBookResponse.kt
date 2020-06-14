@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName
 
 data class NewBookResponse(
     @SerializedName("result")
-    val result: List<Result>?,
+    val result: List<NewBook>?,
     @SerializedName("success")
     val success: Boolean?,
     @SerializedName("time")
     val time: Time?
 )
 
-data class Result(
+data class NewBook(
     @SerializedName("book_id")
     val bookId: Int?,
     @SerializedName("category")

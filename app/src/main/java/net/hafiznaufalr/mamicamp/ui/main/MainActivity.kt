@@ -9,9 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import net.hafiznaufalr.mamicamp.R
 import net.hafiznaufalr.mamicamp.data.model.Genre
+import net.hafiznaufalr.mamicamp.data.model.NewBook
 import net.hafiznaufalr.mamicamp.data.model.Result
 import net.hafiznaufalr.mamicamp.data.network.NetworkService
 import net.hafiznaufalr.mamicamp.databinding.ActivityMainBinding
+import net.hafiznaufalr.mamicamp.ui.detailBook.DetailBookActivity
 import net.hafiznaufalr.mamicamp.ui.genre.GenreActivity
 import net.hafiznaufalr.mamicamp.utils.Status
 import net.hafiznaufalr.mamicamp.utils.ViewModelFactory
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var newBookAdapter: NewBookAdapter
     private lateinit var genreAdapter: GenreAdapter
-    private var listNewBook: MutableList<Result> = mutableListOf()
+    private var listNewBook: MutableList<NewBook> = mutableListOf()
     private var listGenre: MutableList<Genre> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,13 +42,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        newBookAdapter = NewBookAdapter(listNewBook){
-
+        newBookAdapter = NewBookAdapter(listNewBook) { book ->
+            val intent = Intent(this, DetailBookActivity::class.java)
+            intent.putExtra("idBook", book.bookId)
+            startActivity(intent)
         }
         binding.rvNewBooks.adapter = newBookAdapter
 
-
-        genreAdapter = GenreAdapter(listGenre){genre ->
+        genreAdapter = GenreAdapter(listGenre) { genre ->
             val intent = Intent(this, GenreActivity::class.java)
             intent.putExtra("idGenre", genre.id)
             intent.putExtra("nameGenre", genre.title)
@@ -61,16 +64,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun observer() {
         mainViewModel.getDataNewBooks().observe(this, Observer {
-            when(it.status){
-                Status.LOADING ->{
+            when (it.status) {
+                Status.LOADING -> {
                     binding.swipeHome.isRefreshing = true
                 }
-                Status.ERROR ->{
+                Status.ERROR -> {
                     binding.swipeHome.isRefreshing = false
                     shortToast(this, it.message!!)
                 }
-                Status.SUCCESS ->{
-                    it.data.let {response ->
+                Status.SUCCESS -> {
+                    it.data.let { response ->
                         listNewBook.clear()
                         listNewBook.addAll(response?.result!!)
                         newBookAdapter.notifyDataSetChanged()
@@ -81,16 +84,16 @@ class MainActivity : AppCompatActivity() {
             }
         })
         mainViewModel.getDataGenre().observe(this, Observer {
-            when(it.status){
-                Status.LOADING ->{
+            when (it.status) {
+                Status.LOADING -> {
                     binding.swipeHome.isRefreshing = true
                 }
-                Status.ERROR ->{
+                Status.ERROR -> {
                     binding.swipeHome.isRefreshing = false
                     shortToast(this, it.message!!)
                 }
-                Status.SUCCESS ->{
-                    it.data.let {response ->
+                Status.SUCCESS -> {
+                    it.data.let { response ->
                         listGenre.clear()
                         listGenre.addAll(response?.resource!!)
                         genreAdapter.notifyDataSetChanged()

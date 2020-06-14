@@ -5,4 +5,7 @@
     <string name="genre">Genre</string>
     <string name="image">image</string>
     <string name="new_books">New Books</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="reviews">Reviews</string>
+    <string name="see_writer_profile">See Writer Profile</string>
 </resources>

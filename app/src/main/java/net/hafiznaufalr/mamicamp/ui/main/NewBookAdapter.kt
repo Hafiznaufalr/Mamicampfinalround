@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import net.hafiznaufalr.mamicamp.R
-import net.hafiznaufalr.mamicamp.data.model.Result
+import net.hafiznaufalr.mamicamp.data.model.NewBook
 import net.hafiznaufalr.mamicamp.databinding.ItemNewBookBinding
 import net.hafiznaufalr.mamicamp.utils.Constant.BASE_IMAGE_URL
 import net.hafiznaufalr.mamicamp.utils.Constant.IMAGE_KEY
 
-class NewBookAdapter(private val books: List<Result>,
-                  private val onCLickListener: (Result) -> Unit
+class NewBookAdapter(private val books: List<NewBook>,
+                  private val onCLickListener: (NewBook) -> Unit
 ) :
     RecyclerView.Adapter<NewBookAdapter.BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
@@ -28,11 +28,14 @@ class NewBookAdapter(private val books: List<Result>,
     }
 
     class BookViewHolder(private val binding: ItemNewBookBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindItem(item: Result, onCLickListener: (Result) -> Unit) {
+        fun bindItem(item: NewBook, onCLickListener: (NewBook) -> Unit) {
             val cover = BASE_IMAGE_URL + item.coverUrl + IMAGE_KEY
             Glide.with(binding.ivBook.context).load(cover).into(binding.ivBook)
             binding.tvTitleBook.text = item.title
             binding.tvWriter.text = item.writerByWriterId?.userByUserId?.name
+            binding.root.rootView.setOnClickListener {
+                onCLickListener(item)
+            }
         }
     }
 

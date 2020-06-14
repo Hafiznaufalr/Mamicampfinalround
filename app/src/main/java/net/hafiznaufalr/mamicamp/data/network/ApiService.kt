@@ -2,10 +2,12 @@ package net.hafiznaufalr.mamicamp.data.network
 
 import kotlinx.coroutines.Deferred
 import net.hafiznaufalr.mamicamp.data.model.BookByGenreResponse
+import net.hafiznaufalr.mamicamp.data.model.DetailBookResponse
 import net.hafiznaufalr.mamicamp.data.model.GenreResponse
 import net.hafiznaufalr.mamicamp.data.model.NewBookResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -25,4 +27,10 @@ interface ApiService {
         @Header("x-dreamfactory-api-key") apiKey: String,
         @Query("id") id: String
     ): Deferred<BookByGenreResponse>
+
+    @GET("api/v2/book/detail/{book_id}")
+    fun getBookDetailByIdAsync(
+        @Header("x-dreamfactory-api-key") apiKey: String,
+        @Path("book_id") id: String
+    ): Deferred<DetailBookResponse>
 }

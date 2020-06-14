@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import net.hafiznaufalr.mamicamp.data.network.ApiService
 import net.hafiznaufalr.mamicamp.data.repository.RemoteRepository
 import net.hafiznaufalr.mamicamp.ui.detailBook.DetailViewModel
+import net.hafiznaufalr.mamicamp.ui.detailWriter.DetailWriterViewModel
 import net.hafiznaufalr.mamicamp.ui.genre.GenreViewModel
 import net.hafiznaufalr.mamicamp.ui.main.MainViewModel
 
@@ -19,6 +20,9 @@ class ViewModelFactory(private val apiService: ApiService) : ViewModelProvider.F
         }
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(RemoteRepository(apiService)) as T
+        }
+        if (modelClass.isAssignableFrom(DetailWriterViewModel::class.java)) {
+            return DetailWriterViewModel(RemoteRepository(apiService)) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }

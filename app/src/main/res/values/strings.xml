@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookApps</string>
+    <string name="app_name">MyBooks</string>
     <string name="mybooks">MyBooks</string>
     <string name="welcome_to_mybooks">Welcome to MyBooks</string>
     <string name="genre">Genre</string>
@@ -8,4 +8,7 @@
     <string name="synopsis">Synopsis</string>
     <string name="reviews">Reviews</string>
     <string name="see_writer_profile">See Writer Profile</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="description">Description</string>
 </resources>

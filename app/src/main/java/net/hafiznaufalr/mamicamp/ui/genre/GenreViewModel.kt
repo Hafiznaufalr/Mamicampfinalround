@@ -6,11 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import net.hafiznaufalr.mamicamp.data.model.BookByGenreResponse
-import net.hafiznaufalr.mamicamp.data.model.GenreResponse
-import net.hafiznaufalr.mamicamp.data.model.NewBookResponse
 import net.hafiznaufalr.mamicamp.data.repository.RemoteRepository
 import net.hafiznaufalr.mamicamp.utils.Resource
-import java.lang.Exception
 
 class GenreViewModel(private val repository: RemoteRepository): ViewModel() {
     private val bookByGenreResponse = MutableLiveData<Resource<BookByGenreResponse>>()

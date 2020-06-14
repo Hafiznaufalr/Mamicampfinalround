@@ -87,7 +87,7 @@ class DetailBookActivity : AppCompatActivity() {
         binding.tvSynopsis.text = response?.result?.synopsis
         binding.tvSeeWriter.setOnClickListener {
             val intent = Intent(this, DetailWriterActivity::class.java)
-            intent.putExtra("idWriter", response?.result?.writerByWriterId?.userId)
+            intent.putExtra("idUser", response?.result?.writerByWriterId?.userId)
             startActivity(intent)
         }
     }

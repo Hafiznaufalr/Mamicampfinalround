@@ -1,9 +1,6 @@
 package net.hafiznaufalr.mamicamp.data.repository
 
-import net.hafiznaufalr.mamicamp.data.model.BookByGenreResponse
-import net.hafiznaufalr.mamicamp.data.model.DetailBookResponse
-import net.hafiznaufalr.mamicamp.data.model.GenreResponse
-import net.hafiznaufalr.mamicamp.data.model.NewBookResponse
+import net.hafiznaufalr.mamicamp.data.model.*
 import net.hafiznaufalr.mamicamp.data.network.ApiService
 import net.hafiznaufalr.mamicamp.utils.Constant.TOKEN_HEADER
 
@@ -22,5 +19,9 @@ class RemoteRepository(private val apiService: ApiService) {
 
     suspend fun getDataBookDetail(id: String): DetailBookResponse{
         return apiService.getBookDetailByIdAsync(TOKEN_HEADER, id).await()
+    }
+
+    suspend fun getDataWriterProfile(id: String): DetailWriterResponse{
+        return apiService.getWriterProfileAsync(TOKEN_HEADER, id).await()
     }
 }

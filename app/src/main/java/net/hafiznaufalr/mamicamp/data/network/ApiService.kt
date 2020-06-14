@@ -1,10 +1,7 @@
 package net.hafiznaufalr.mamicamp.data.network
 
 import kotlinx.coroutines.Deferred
-import net.hafiznaufalr.mamicamp.data.model.BookByGenreResponse
-import net.hafiznaufalr.mamicamp.data.model.DetailBookResponse
-import net.hafiznaufalr.mamicamp.data.model.GenreResponse
-import net.hafiznaufalr.mamicamp.data.model.NewBookResponse
+import net.hafiznaufalr.mamicamp.data.model.*
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -33,4 +30,10 @@ interface ApiService {
         @Header("x-dreamfactory-api-key") apiKey: String,
         @Path("book_id") id: String
     ): Deferred<DetailBookResponse>
+
+    @GET("api/v2/writer/detail/{user_id}")
+    fun getWriterProfileAsync(
+        @Header("x-dreamfactory-api-key") apiKey: String,
+        @Path("user_id") id: String
+    ): Deferred<DetailWriterResponse>
 }
